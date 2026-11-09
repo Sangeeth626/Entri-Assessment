@@ -1196,8 +1196,331 @@ int Second_smallest(int arr[], int limit)
       The rotation must work for any value of n, including values larger than the array size. 
       The final rotated array should be displayed on the screen. Pre-requisites: Arrays, Loops, Modulus Operator.*/
 
-#include<stdio.h>
+/*#include<stdio.h>
+#define SIZE 20
+
+int right_rotation(int arr[], int npr, int limit);
+int left_rotation(int arr[], int npr, int limit);
+
 int main()
 {
-    
+    int arr[SIZE], limit, npr, dir;
+
+    printf("Enter a size of array : ");
+    scanf("%d", &limit);
+
+    printf("Enter the array elements : ");
+    for(int i=0 ; i<limit ; i++)
+    {
+        scanf("%d",&arr[i]);
+    }
+
+    printf("Enter the number of position to be rotated : ");
+    scanf("%d", &npr) ;
+
+    printf("Direction of rotation:\n") ;
+    printf("1.Left Rotation\n");
+    printf("2.Right Rotation\n");
+    printf("Enter your choice : ");
+    scanf("%d", &dir) ;
+
+    switch(dir)
+    {
+        case 1 : right_rotation(arr, npr, limit); break ;
+        case 2 : left_rotation(arr, npr, limit); break ;
+        default :printf("Invaid input"); break ;
+    }
+
+    return 0 ;
 }      
+
+int right_rotation(int arr[], int npr, int limit)
+{
+    int temp ;
+
+    npr = npr % limit ;
+
+    for(int i=0 ; i<npr ; i++)
+    {
+        temp = arr[limit-1] ;    // storing last value in temp
+
+        // Right shift
+        for(int j=0 ; j<(limit-1) ; j++)
+        {
+            arr[limit-1-j] = arr[limit-2-j] ;
+        }
+
+        arr[0] = temp ;      // restoring last value to first position
+    }
+
+    for(int i=0 ; i<limit ; i++)
+    {
+        printf("%d ", arr[i] );
+    }
+}
+
+int left_rotation(int arr[], int npr, int limit)
+{
+    int temp ;
+    
+    npr = npr % limit;
+
+    for(int i=0 ; i<npr ; i++)
+    {
+        temp = arr[0] ;    // storing first value in temp
+
+        // Left shift
+        for(int j=0 ; j<(limit-1) ; j++)
+        {
+            arr[j] = arr[j+1] ;
+        }
+
+        arr[limit-1] = temp ;      // restoring first value to last position
+    }
+
+    printf("\n\n") ;
+    for(int i=0 ; i<limit ; i++)
+    {
+        printf("%d ", arr[i] );
+    }
+}*/
+
+
+
+
+
+/*24. Write a C program that merges two sorted arrays into a single sorted array without using any sorting function.
+      Description: The program should prompt the user to enter the sizes and elements of two arrays, each already sorted in ascending order. 
+      It must then merge them into a third array by comparing elements from both arrays one by one and placing the smaller element first, continuing until all elements are placed. 
+      The final merged sorted array should be displayed on the screen. Pre-requisites: Arrays, Loops, Multiple Array Handling.*/
+
+/*#include<stdio.h>
+#define SIZE 30
+int main()
+{
+    int arr1[SIZE], arr2[SIZE], limit1, limit2, arr3[SIZE], limit3;
+    int i, j, k;
+
+    // Getting Input
+    printf("Enter the size of first array : ");
+    scanf("%d", &limit1);
+    printf("Enter the array elements in ascending order : ");
+    for(i=0 ; i<limit1 ; i++)
+    {
+        scanf("%d", &arr1[i]);
+    }
+
+    printf("Enter the size of second array : ");
+    scanf("%d", &limit2);
+    printf("Enter the array elements in ascending order : ");
+    for(i=0 ; i<limit2 ; i++)
+    {
+        scanf("%d", &arr2[i]);
+    }
+
+    // Core Part
+    i=0;
+    j=0;
+    k=0 ;
+    while(i<limit1 && j<limit2)
+    {
+       if(arr1[i] <= arr2[j])
+       {
+            arr3[k] = arr1[i] ;
+            i++ ;
+            k++ ;
+       }
+       else if(arr2[j] < arr1[i])
+       {
+            arr3[k] = arr2[j];
+            j++ ;
+            k++ ;
+       }
+    }
+
+    while(i<limit1)        // If arr1 has left over
+    {
+        arr3[k] = arr1[i] ;
+        i++ ;
+        k++ ;
+    }
+
+    while(j<limit2)       // If arr2 has left over
+    {
+        arr3[k] = arr2[j] ;
+        j++ ;
+        k++ ;
+    }
+
+    
+    // Printing Combined array
+    limit3 = limit1 + limit2 ;
+
+    for(k=0 ; k<limit3 ; k++)
+    {
+        printf("%d ", arr3[k]);
+    }
+
+    return 0 ;
+}*/      
+
+
+
+
+
+/* 25. Write a C program that finds all pairs of elements in an array whose sum equals a given target value. 
+       Description: The program should prompt the user to enter the size of the array, its elements, and a target sum. 
+       It must then examine all possible pairs of elements in the array and identify every pair whose sum matches the target. 
+       Each valid pair should be printed on the screen. If no such pair exists, an appropriate message should be displayed. 
+       The same element should not be paired with itself. Pre-requisites: Arrays, Nested Loops, Conditional Statements.*/
+
+/*#include<stdio.h>
+#define SIZE 20
+int main()
+{
+    int arr[SIZE], limit, target_value ;
+    int i, j, flag=1;
+
+    // step 1 : Getting input
+    printf("Enter the size of array : ");
+    scanf("%d", &limit);
+
+    printf("Enter the array elements : ");
+    for(i=0 ; i<limit ; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Enter the target sum : ");
+    scanf("%d", &target_value);
+
+    // step 2 : Core Part
+    
+    i=0 ;
+    while(i < limit)
+    {
+        j=i+1 ;
+        while(j < limit)
+        {
+            if((arr[i] + arr[j]) == target_value)
+            {
+                printf("%d + %d = %d\n", arr[i], arr[j], target_value) ;
+                flag = 0 ;
+            }
+
+            j++ ;
+        }
+
+        i++ ;
+    }
+
+    if(flag == 1)
+    {
+        printf("No such pair exist");
+    }
+
+    return 0 ;
+}*/
+
+
+
+
+
+/*26. Write a C program that rearranges an array such that all negative numbers appear before all positive numbers while preserving the relative order of both groups.
+      Description: The program should prompt the user to enter the size of the array and its elements (a mix of positive and negative integers).
+      It must then rearrange the elements so that all negative numbers come first, followed by all positive numbers, without changing the order in which the negatives appear among themselves or the positives among themselves. 
+      Zero can be treated as positive. The rearranged array should be displayed on the screen. Pre-requisites: Arrays, Loops, Temporary Storage, Order Preservation Logic.*/
+
+/*#include<stdio.h>
+#define SIZE 20
+int main()
+{
+    int arr[SIZE], limit, temp_arr[SIZE] = {0};
+    int i, j;
+
+    // step 1 : Getting Input
+    printf("Enter the size of array : ");
+    scanf("%d", &limit);
+
+    printf("Enter the array elements : ");
+    for(i=0 ; i<limit ; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+
+    // step 2 : Core part 
+    j=0 ;
+    for(i=0 ; i<limit ; i++)
+    {
+        if(arr[i] < 0)
+        {
+            temp_arr[j] = arr[i] ;
+            j++ ;
+        }
+    }
+
+    for(i=0 ; i<limit ; i++)
+    {
+        if(arr[i]>= 0)
+        {
+            temp_arr[j] = arr[i] ;
+            j++ ;
+        }
+    }
+
+    //step 3 : printing output
+    for(i=0 ; i<limit ; i++)
+    {
+        arr[i] = temp_arr[i] ;
+        printf("%d ", arr[i]);
+    }
+
+    return 0 ;
+}*/      
+
+
+
+
+
+/*27. Define a structure Complex with real and imaginary parts. Write a C program to add two complex numbers and display the result.
+      Description: The program should define a structure to represent a complex number with two members: real part and imaginary part. 
+      It must then create functions to perform addition of two complex numbers and to display a complex number in a readable format (e.g., a + bi). 
+      The program should take input for two complex numbers, compute their sum using the defined function, and print the result. 
+      Pre-requisites: Structures, Functions, Basic Arithmetic Operations, Input/Output*/
+
+/*#include<stdio.h>
+
+typedef struct
+{
+    int real_part ;
+    int imag_part ;
+} Comp_num ;
+
+Comp_num add_complex(Comp_num n1, Comp_num n2);
+
+int main()
+{
+    Comp_num n1, n2, result;
+
+    printf("Enter first complex numbers : ");
+    scanf("%d%d", &n1.real_part, &n1.imag_part);
+    printf("Enter second complex number : ");
+    scanf("%d%d", &n2.real_part, &n2.imag_part);
+
+    result = add_complex(n1,n2);
+
+    printf("Sum = %d + %dj \n", result.real_part, result.imag_part);
+
+    return 0 ;
+}      
+
+Comp_num add_complex(Comp_num n1, Comp_num n2)
+{
+    int real , imag ;
+    Comp_num sum ;
+
+    sum.real_part = n1.real_part + n2.real_part;
+    sum.imag_part = n1.imag_part + n2.imag_part ;
+
+    return sum;
+}*/
